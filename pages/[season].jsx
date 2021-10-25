@@ -1,4 +1,4 @@
-import { Navbar } from '../components';
+import { Navbar, CardList } from '../components';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
@@ -21,8 +21,8 @@ function Season() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<Navbar />
-			<div className='main-content h-screen w-full flex justify-center bg-theme-primary'>
-				<div className='chart-view flex flex-col items-center h-screen mb-16 z-20 relative w-11/12 md:w-3/5 '>
+			<div className='main-content w-full flex justify-center bg-theme-primary'>
+				<div className='chart-view flex flex-col items-center h-full mb-16 z-20 relative w-11/12 md:w-5/6 '>
 					{/* Search bar on small screens */}
 					<div className='flex text-gray-600 md:hidden w-full mt-3 mb-7'>
 						<input
@@ -41,33 +41,38 @@ function Season() {
 							<div className='w-full flex justify-start md:text-white text-2xl font-bold text-theme-base'>
 								TV
 							</div>
-							<div className='w-full justify-end hidden md:flex'>
+							<div className=' justify-end hidden md:flex'>
 								<ShareIcon className='h-6 w-6 text-gray-400 mx-2' />
 								<CameraIcon className='h-6 w-6 text-gray-400 mx-2' />
 								<SearchIcon className='h-6 w-6 text-gray-400 mx-2' />
 								<TiArrowUnsorted className='h-6 w-6 text-gray-400 mx-2' />
 							</div>
 						</div>
+						<CardList />
 					</section>
 					<section className='w-full'>
 						<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
 							TV SHORT
 						</div>
+						<CardList />
 					</section>
 					<section className='w-full'>
 						<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
 							LEFTOVERS
 						</div>
+						<CardList />
 					</section>
 					<section className='w-full'>
 						<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
 							MOVIE
 						</div>
+						<CardList />
 					</section>
 					<section className='w-full'>
 						<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
 							OVA / ONA / SPECIAL
 						</div>
+						<CardList />
 					</section>
 				</div>
 			</div>
