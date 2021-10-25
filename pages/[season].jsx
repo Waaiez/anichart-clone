@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { ShareIcon, CameraIcon, SearchIcon } from '@heroicons/react/outline';
 import { TiArrowUnsorted } from 'react-icons/ti';
+import useInView from 'react-cool-inview';
 
 function Season() {
 	const router = useRouter();
@@ -12,6 +13,10 @@ function Season() {
 
 	useEffect(() => {
 		router.query.season && setFullSeason(router.query.season);
+	});
+
+	const { observe, inView } = useInView({
+		onEnter: ({ unobserve }) => unobserve(), // only run once
 	});
 
 	return (
@@ -50,29 +55,45 @@ function Season() {
 						</div>
 						<CardList />
 					</section>
-					<section className='w-full'>
-						<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
-							TV SHORT
-						</div>
-						<CardList />
+					<section className='w-full' ref={observe}>
+						{inView && (
+							<>
+								<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
+									TV SHORT
+								</div>
+								<CardList />
+							</>
+						)}
 					</section>
-					<section className='w-full'>
-						<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
-							LEFTOVERS
-						</div>
-						<CardList />
+					<section className='w-full' ref={observe}>
+						{inView && (
+							<>
+								<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
+									LEFTOVERS
+								</div>
+								<CardList />
+							</>
+						)}
 					</section>
-					<section className='w-full'>
-						<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
-							MOVIE
-						</div>
-						<CardList />
+					<section className='w-full' ref={observe}>
+						{inView && (
+							<>
+								<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
+									MOVIE
+								</div>
+								<CardList />
+							</>
+						)}
 					</section>
-					<section className='w-full'>
-						<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
-							OVA / ONA / SPECIAL
-						</div>
-						<CardList />
+					<section className='w-full' ref={observe}>
+						{inView && (
+							<>
+								<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
+									OVA / ONA / SPECIAL
+								</div>
+								<CardList />
+							</>
+						)}
 					</section>
 				</div>
 			</div>
