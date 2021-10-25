@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { LoadingIcon } from '../components';
+import Head from 'next/head';
 
 function getCurrentSeason() {
 	let d = new Date();
@@ -31,8 +32,14 @@ export default function Home() {
 	});
 
 	return (
-		<div className='flex items-center justify-center h-screen'>
-			{isLoading && <LoadingIcon width='100' height='100' />}
-		</div>
+		<>
+			<Head>
+				<title>AniChart: Home</title>
+				<link rel='icon' href='/favicon.ico' />
+			</Head>
+			<div className='flex items-center justify-center h-screen'>
+				{isLoading && <LoadingIcon width='100' height='100' />}
+			</div>
+		</>
 	);
 }
