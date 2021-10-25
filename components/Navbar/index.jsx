@@ -43,7 +43,7 @@ export default function Navbar() {
 	return (
 		<>
 			{/* SM Navbar */}
-			<div className='md:hidden fixed inset-x-0 bottom-0 pt-8 pb-5 px-5 flex justify-items-start shadow-2xl sm-nav-wrap'>
+			<div className='md:hidden fixed inset-x-0 bottom-0 pt-8 pb-5 px-5 flex justify-items-start shadow-2xl sm-nav-wrap z-50 select-none '>
 				{/* Menu 1 - seasons */}
 				{!isShowing && (
 					<div className='bg-[#2b2d42] h-14 w-full z-100 rounded-md mr-5 flex justify-evenly shadow-2xl sm-seasons'>
@@ -115,7 +115,7 @@ export default function Navbar() {
 				)}
 				{/* Menu 2 - charts */}
 				{isShowing && (
-					<div className='bg-[#2b2d42] h-14 w-full z-100 rounded-md mr-5 flex justify-evenly shadow-2xl sm-charts'>
+					<div className='bg-[#2b2d42] h-14 w-full z-10 rounded-md mr-5 flex justify-evenly shadow-2xl sm-charts z-50'>
 						<Link href='/archive'>
 							<a className='group'>
 								<div
@@ -185,14 +185,14 @@ export default function Navbar() {
 
 				{/* Menu Icon */}
 				<Switch checked={isShowing} onChange={setIsShowing}>
-					<div className='bg-[#2b2d42] h-14 w-16 z-100 rounded-md flex items-center justify-center shadow-2xl sm-menu'>
+					<div className='bg-[#2b2d42] h-14 w-16 z-100 rounded-md flex items-center justify-center shadow-2xl sm-menu z-50'>
 						<MenuIcon className='text-white h-10' />
 					</div>
 				</Switch>
 			</div>
 
 			{/* MD and above Navbar */}
-			<div className='hidden md:block'>
+			<div className='hidden md:block select-none '>
 				{/* Backround behind Navbar */}
 				<div className='bg-[#2b2d42] h-56 z-10 absolute inset-x-0 top-0'></div>
 				<div className='flex justify-between md:mx-10 lg:mx-16 my-10 h-11 navbar z-30 relative'>
