@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
   const theme = useStorage();
   return (
     <StorageProvider>
-      <div className={`${theme}`}>
+      <div className={`${theme} bg-theme-primary`}>
         <Component {...pageProps} />
       </div>
     </StorageProvider>

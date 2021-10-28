@@ -19,7 +19,7 @@ function Season() {
 	});
 
 	const { observe, inView } = useInView({
-		onEnter: ({ unobserve }) => unobserve(), // only run once
+		onEnter: ({ unobserve }) => unobserve(),
 	});
 
 	useEffect(() => {
@@ -33,8 +33,7 @@ function Season() {
 				page: 1,
 				sort: 'POPULARITY_DESC',
 			});
-			console.log(dataSeasonTV);
-			setDataSeasonTV(dataSeasonTV);
+			//setDataSeasonTV(dataSeasonTV);
 			setIsLoading(false);
 		}
 
@@ -48,8 +47,8 @@ function Season() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<Navbar />
-			<div className='main-content w-full flex justify-center bg-theme-primary'>
-				<div className='chart-view flex flex-col items-center h-full mb-16 z-20 relative w-11/12 md:w-5/6'>
+			<div className='main-content w-full flex justify-center '>
+				<div className='chart-view flex flex-col items-center h-full mb-16 z-20 relative w-11/12 md:w-8/12 lg:w-11/12 xl:w-10/12 2xl:w-11/12'>
 					{/* Search bar on small screens */}
 					<div className='flex text-gray-600 md:hidden w-full mt-3 mb-7'>
 						<input
@@ -62,7 +61,8 @@ function Season() {
 							<TiArrowUnsorted className='h-5 w-6 text-gray-400' />
 						</div>
 					</div>
-
+					{/* Search bar on small screens */}
+					{/* TV Section */}
 					<section className='w-full'>
 						<div className='flex justify-between w-full mb-5'>
 							<div className='w-full flex justify-start md:text-white text-2xl font-bold text-theme-base'>
@@ -77,6 +77,8 @@ function Season() {
 						</div>
 						<CardList data={dataSeasonTV} cardNum={6} />
 					</section>
+					{/* TV Section */}
+					{/* TV Short Section */}
 					<section className='w-full' ref={observe}>
 						{inView && (
 							<>
@@ -87,6 +89,8 @@ function Season() {
 							</>
 						)}
 					</section>
+					{/* TV Short Section */}
+					{/* Leftovers Section */}
 					<section className='w-full' ref={observe}>
 						{inView && (
 							<>
@@ -97,6 +101,8 @@ function Season() {
 							</>
 						)}
 					</section>
+					{/* Leftovers Section */}
+					{/* Movie Section */}
 					<section className='w-full' ref={observe}>
 						{inView && (
 							<>
@@ -107,6 +113,8 @@ function Season() {
 							</>
 						)}
 					</section>
+					{/* Movie Section */}
+					{/* OVA / ONA / Special Section */}
 					<section className='w-full' ref={observe}>
 						{inView && (
 							<>
@@ -117,6 +125,7 @@ function Season() {
 							</>
 						)}
 					</section>
+					{/* OVA / ONA / Special Section */}
 				</div>
 			</div>
 		</>

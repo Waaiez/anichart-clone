@@ -19,18 +19,21 @@ export function StorageProvider({ children }) {
 			setItem('theme', 'theme-light');
 			setTheme('theme-light');
 		}
+
 		if (localStorage.language) {
 			setLanguage(getItem('language'));
 		} else {
 			setItem('language', 'romaji');
 			setLanguage('romaji');
 		}
+
 		if (localStorage.provider) {
 			setProvider(getItem('provider'));
 		} else {
 			setItem('provider', 'anilist');
 			setProvider('anilist');
 		}
+
 		document.documentElement.classList.add(theme);
 		setIsLoading(false);
 	}, []);
