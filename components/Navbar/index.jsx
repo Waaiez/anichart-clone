@@ -43,79 +43,86 @@ export default function Navbar() {
 	return (
 		<>
 			{/* SM Navbar */}
+			<div className='fixed md:hidden -inset-0.5 bottom-0 pt-8 pb-5 px-5 flex justify-items-start shadow-2xl sm-nav-wrap select-none '></div>
 			<div className='md:hidden fixed inset-x-0 bottom-0 pt-8 pb-5 px-5 flex justify-items-start shadow-2xl sm-nav-wrap z-50 select-none '>
 				{/* Menu 1 - seasons */}
+				<div className=' absolute bg-theme-secondary blur h-28 opacity-95 w-full inset-x-0 bottom-0'></div>
 				{!isShowing && (
-					<div className='bg-[#2b2d42] h-14 w-full z-100 rounded-md mr-5 flex justify-evenly shadow-2xl sm-seasons'>
-						<Link href={`/WINTER-${getSeason()}`}>
-							<a className='group'>
-								<div
-									className={`my-2 flex flex-col w-full group-hover:text-[#3AA0D8] transition duration-300 ease-in-out ${
-										fullSeason.split('-')[0] === 'WINTER'
-											? 'text-gray-100'
-											: 'text-gray-400'
-									}`}
-								>
-									<FaRegSnowflake className='h-5 w-5 flex mx-auto' />
-									<div className='text-xs text-center'>
-										Winter
+					<>
+						<div className='relative bg-[#2b2d42] h-14 w-full z-100 rounded-md mr-5 flex justify-evenly shadow-2xl sm-seasons'>
+							<Link href={`/WINTER-${getSeason()}`}>
+								<a className='group w-full'>
+									<div
+										className={`my-2 flex flex-col w-full group-hover:text-[#3AA0D8] transition duration-300 ease-in-out ${
+											fullSeason.split('-')[0] ===
+											'WINTER'
+												? 'text-gray-100'
+												: 'text-gray-400'
+										}`}
+									>
+										<FaRegSnowflake className='h-5 w-5 flex mx-auto' />
+										<div className='text-xs text-center'>
+											Winter
+										</div>
 									</div>
-								</div>
-							</a>
-						</Link>
-						<Link href={`/SPRING-${getSeason()}`}>
-							<a className='group'>
-								<div
-									className={`my-2 flex flex-col w-full group-hover:text-[#3AA0D8] transition duration-300 ease-in-out ${
-										fullSeason.split('-')[0] === 'SPRING'
-											? 'text-gray-100'
-											: 'text-gray-400'
-									}`}
-								>
-									<FaSeedling className='h-5 w-5 flex mx-auto' />
-									<div className='text-xs text-center'>
-										Spring
+								</a>
+							</Link>
+							<Link href={`/SPRING-${getSeason()}`}>
+								<a className='group w-full'>
+									<div
+										className={`my-2 flex flex-col w-full group-hover:text-[#3AA0D8] transition duration-300 ease-in-out ${
+											fullSeason.split('-')[0] ===
+											'SPRING'
+												? 'text-gray-100'
+												: 'text-gray-400'
+										}`}
+									>
+										<FaSeedling className='h-5 w-5 flex mx-auto' />
+										<div className='text-xs text-center'>
+											Spring
+										</div>
 									</div>
-								</div>
-							</a>
-						</Link>
-						<Link href={`/SUMMER-${new Date().getFullYear()}`}>
-							<a className='group'>
-								<div
-									className={`my-2 flex flex-col w-full group-hover:text-[#3AA0D8] transition duration-300 ease-in-out ${
-										fullSeason.split('-')[0] === 'SUMMER'
-											? 'text-gray-100'
-											: 'text-gray-400'
-									}`}
-								>
-									<FaSun className='h-5 w-5 flex mx-auto' />
-									<div className='text-xs text-center'>
-										Summer
+								</a>
+							</Link>
+							<Link href={`/SUMMER-${new Date().getFullYear()}`}>
+								<a className='group w-full'>
+									<div
+										className={`my-2 flex flex-col w-full group-hover:text-[#3AA0D8] transition duration-300 ease-in-out ${
+											fullSeason.split('-')[0] ===
+											'SUMMER'
+												? 'text-gray-100'
+												: 'text-gray-400'
+										}`}
+									>
+										<FaSun className='h-5 w-5 flex mx-auto' />
+										<div className='text-xs text-center'>
+											Summer
+										</div>
 									</div>
-								</div>
-							</a>
-						</Link>
-						<Link href={`/FALL-${new Date().getFullYear()}`}>
-							<a className='group'>
-								<div
-									className={`my-2 flex flex-col w-full group-hover:text-[#3AA0D8] transition duration-300 ease-in-out ${
-										fullSeason.split('-')[0] === 'FALL'
-											? 'text-gray-100'
-											: 'text-gray-400'
-									}`}
-								>
-									<FaLeaf className='h-5 w-5 flex mx-auto' />
-									<div className='text-xs text-center'>
-										Fall
+								</a>
+							</Link>
+							<Link href={`/FALL-${new Date().getFullYear()}`}>
+								<a className='group w-full'>
+									<div
+										className={`my-2 flex flex-col w-full group-hover:text-[#3AA0D8] transition duration-300 ease-in-out ${
+											fullSeason.split('-')[0] === 'FALL'
+												? 'text-gray-100'
+												: 'text-gray-400'
+										}`}
+									>
+										<FaLeaf className='h-5 w-5 flex mx-auto' />
+										<div className='text-xs text-center'>
+											Fall
+										</div>
 									</div>
-								</div>
-							</a>
-						</Link>
-					</div>
+								</a>
+							</Link>
+						</div>
+					</>
 				)}
 				{/* Menu 2 - charts */}
 				{isShowing && (
-					<div className='bg-[#2b2d42] h-14 w-full z-10 rounded-md mr-5 flex justify-evenly shadow-2xl sm-charts z-50'>
+					<div className='relative bg-[#2b2d42] h-14 w-full rounded-md mr-5 flex justify-evenly shadow-2xl sm-charts z-100'>
 						<Link href='/archive'>
 							<a className='group'>
 								<div
@@ -185,8 +192,8 @@ export default function Navbar() {
 
 				{/* Menu Icon */}
 				<Switch checked={isShowing} onChange={setIsShowing}>
-					<div className='bg-[#2b2d42] h-14 w-16 z-100 rounded-md flex items-center justify-center shadow-2xl sm-menu z-50'>
-						<MenuIcon className='text-white h-10' />
+					<div className='relative bg-[#2b2d42] h-14 w-16 z-100 rounded-md flex items-center justify-center shadow-2xl sm-menu'>
+						<MenuIcon className='text-white h-10 z-100' />
 					</div>
 				</Switch>
 			</div>
