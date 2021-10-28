@@ -1,14 +1,14 @@
 export default function SkeletonCard() {
 	return (
-		<div className=' max-h-72 min-w-96'>
-			<div className='h-72 rounded-md drop-shadow-xl border-2 border-gray-200 overflow-hidden bg-gray-100 flex'>
-				<div className='bg-gray-400 h-full xs:w-4/5 sm:w-2/4 w-1/3 lg:w-4/5 animate-pulse'></div>
-				<div className='flex flex-col w-full mx-4 mt-4'>
-					<p className='leading-relaxed mb-3 w-full h-7 animate-pulse bg-gray-400'></p>
+		<div className='w-full h-72 xs:h-60 max-h-72'>
+			<div className='flex bg-theme-secondary drop-shadow-xl overflow-hidden h-full'>
+				<div className='w-2/5 bg-cover bg-gray-400 animate-pulse'></div>
+				<div className='w-3/5 p-4'>
+					<p className='leading-relaxed mb-3 w-full h-6 animate-pulse bg-gray-400'></p>
 					<br />
-					<p className='leading-relaxed mb-3 w-full h-3 animate-pulse bg-gray-400'></p>
-					<p className='leading-relaxed mb-3 w-2/3 h-3 animate-pulse bg-gray-400'></p>
-					<p className='leading-relaxed mb-3 w-1/2 h-3 animate-pulse bg-gray-400'></p>
+					<p className='leading-relaxed mb-3 w-full h-2 animate-pulse bg-gray-400'></p>
+					<p className='leading-relaxed mb-3 w-2/3 h-2 animate-pulse bg-gray-400'></p>
+					<p className='leading-relaxed mb-3 w-1/2 h-2 animate-pulse bg-gray-400'></p>
 				</div>
 			</div>
 		</div>
