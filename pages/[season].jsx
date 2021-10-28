@@ -5,11 +5,14 @@ import { useState, useEffect } from 'react';
 import { ShareIcon, CameraIcon, SearchIcon } from '@heroicons/react/outline';
 import { TiArrowUnsorted } from 'react-icons/ti';
 import useInView from 'react-cool-inview';
+import search from './anilist-api/queries/season';
 
 function Season() {
 	const router = useRouter();
 
 	const [fullSeason, setFullSeason] = useState('');
+	const [dataSeasonTV, setDataSeasonTV] = useState();
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		router.query.season && setFullSeason(router.query.season);
@@ -19,6 +22,25 @@ function Season() {
 		onEnter: ({ unobserve }) => unobserve(), // only run once
 	});
 
+	useEffect(() => {
+		setIsLoading(true);
+		setDataSeasonTV();
+		async function fetchPopularData() {
+			const dataSeasonTV = await search({
+				season: fullSeason.split('-')[0],
+				year: fullSeason.split('-')[1],
+				format: 'TV',
+				page: 1,
+				sort: 'POPULARITY_DESC',
+			});
+			console.log(dataSeasonTV);
+			setDataSeasonTV(dataSeasonTV);
+			setIsLoading(false);
+		}
+
+		fullSeason && fetchPopularData();
+	}, [fullSeason]);
+
 	return (
 		<>
 			<Head>
@@ -27,7 +49,7 @@ function Season() {
 			</Head>
 			<Navbar />
 			<div className='main-content w-full flex justify-center bg-theme-primary'>
-				<div className='chart-view flex flex-col items-center h-full mb-16 z-20 relative w-11/12 md:w-5/6 '>
+				<div className='chart-view flex flex-col items-center h-full mb-16 z-20 relative w-11/12 md:w-5/6'>
 					{/* Search bar on small screens */}
 					<div className='flex text-gray-600 md:hidden w-full mt-3 mb-7'>
 						<input
@@ -53,7 +75,7 @@ function Season() {
 								<TiArrowUnsorted className='h-6 w-6 text-gray-400 mx-2' />
 							</div>
 						</div>
-						<CardList />
+						<CardList data={dataSeasonTV} cardNum={6} />
 					</section>
 					<section className='w-full' ref={observe}>
 						{inView && (
@@ -61,7 +83,7 @@ function Season() {
 								<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
 									TV SHORT
 								</div>
-								<CardList />
+								<CardList cardNum={3} />
 							</>
 						)}
 					</section>
@@ -71,7 +93,7 @@ function Season() {
 								<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
 									LEFTOVERS
 								</div>
-								<CardList />
+								<CardList cardNum={1} />
 							</>
 						)}
 					</section>
@@ -81,7 +103,7 @@ function Season() {
 								<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
 									MOVIE
 								</div>
-								<CardList />
+								<CardList cardNum={1} />
 							</>
 						)}
 					</section>
@@ -91,7 +113,7 @@ function Season() {
 								<div className='w-full flex justify-start text-2xl font-bold my-5 text-theme-base'>
 									OVA / ONA / SPECIAL
 								</div>
-								<CardList />
+								<CardList cardNum={1} />
 							</>
 						)}
 					</section>
