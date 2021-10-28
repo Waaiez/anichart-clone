@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { ShareIcon, CameraIcon, SearchIcon } from '@heroicons/react/outline';
 import { TiArrowUnsorted } from 'react-icons/ti';
 import useInView from 'react-cool-inview';
-import search from './anilist-api/queries/season';
+import search from './api/anilist-api/queries/season';
 
 function Season() {
 	const router = useRouter();
