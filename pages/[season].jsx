@@ -47,7 +47,7 @@ function Season() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<Navbar />
-			<div className='main-content w-full flex justify-center '>
+			<main className='main-content w-full flex justify-center '>
 				<div className='chart-view flex flex-col items-center h-full mb-16 z-20 relative w-11/12 md:w-8/12 lg:w-11/12 xl:w-10/12 2xl:w-11/12'>
 					{/* Search bar on small screens */}
 					<div className='flex text-gray-600 md:hidden w-full mt-3 mb-7'>
@@ -127,7 +127,7 @@ function Season() {
 					</section>
 					{/* OVA / ONA / Special Section */}
 				</div>
-			</div>
+			</main>
 		</>
 	);
 }

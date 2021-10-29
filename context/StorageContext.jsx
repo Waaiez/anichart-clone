@@ -13,6 +13,8 @@ export function StorageProvider({ children }) {
 	const [provider, setProvider] = useState();
 
 	useEffect(() => {
+		setIsLoading(true);
+
 		if (localStorage.theme) {
 			setTheme(getItem('theme'));
 		} else {

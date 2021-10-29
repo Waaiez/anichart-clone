@@ -1,6 +1,6 @@
 export default function SkeletonCard() {
 	return (
-		<div className='w-full h-72 xs:h-60 max-h-72'>
+		<div className='w-full sm:h-72 xs:h-60 max-h-72'>
 			<div className='flex bg-theme-secondary drop-shadow-xl overflow-hidden h-full'>
 				<div className='w-2/5 bg-cover bg-gray-400 animate-pulse'></div>
 				<div className='w-3/5 p-4'>
