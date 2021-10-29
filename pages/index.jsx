@@ -29,7 +29,7 @@ export default function Home() {
 		setIsLoading(false);
 
 		if (isLoading === false) router.push(`${season}-${seasonYear}`);
-	});
+	}, [isLoading, router]);
 
 	return (
 		<>

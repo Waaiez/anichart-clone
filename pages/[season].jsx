@@ -16,7 +16,7 @@ function Season() {
 
 	useEffect(() => {
 		router.query.season && setFullSeason(router.query.season);
-	});
+	}, [router.query.season]);
 
 	const { observe, inView } = useInView({
 		onEnter: ({ unobserve }) => unobserve(),
@@ -33,7 +33,7 @@ function Season() {
 				page: 1,
 				sort: 'POPULARITY_DESC',
 			});
-			//setDataSeasonTV(dataSeasonTV);
+			setDataSeasonTV(dataSeasonTV);
 			setIsLoading(false);
 		}
 
