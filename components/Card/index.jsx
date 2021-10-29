@@ -1,14 +1,15 @@
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
-import {
-	EmojiHappyIcon,
-	EmojiSadIcon,
-	HeartIcon,
-	PlusCircleIcon,
-} from '@heroicons/react/outline';
+import { PlusCircleIcon } from '@heroicons/react/outline';
 import parse from 'html-react-parser';
 import { useStorage } from '../../context/StorageContext';
-import Link from 'next/link';
+import ImageHeader from './ImageHeader';
+import AiringEpisodeInfo from './AiringEpisodeInfo';
+import AiringScheduleInfo from './AiringScheduleInfo';
+import AiringSourceInfo from './AiringSourceInfo';
+import Rankings from './Rankings';
+import GenreInfo from './GenreInfo';
+import AdditionalInfo from './AdditionalInfo';
 
 export default function Card({ data }) {
 	const { getItem } = useStorage();
@@ -17,246 +18,73 @@ export default function Card({ data }) {
 	momentDurationFormatSetup(moment);
 	console.log(data);
 	return (
-		<div className='relative max-h-72 min-w-96 h-72 rounded-md drop-shadow-xl hover:drop-shadow-2xl transition duration-500 ease-in-out bg-theme-secondary flex group'>
-			<div className='relative xs:w-4/5 sm:w-2/4 w-1/3 lg:w-4/5'>
-				<Link
-					href={`${
-						storedProvider === 'anilist'
-							? data.siteUrl
-							: data.idMal
-							? `https://myanimelist.net/anime/${data.idMal}`
-							: data.siteUrl
-					}`}
-				>
-					<a className='group w-full'>
-						<div className='bg-black bg-opacity-75 absolute bottom-0 w-full'>
-							<div
-								className='
-						nameHover text-white pt-2 px-2 font-semibold text-sm'
-								style={{
-									'--hover-colour': data.coverImage.color
-										? data.coverImage.color
-										: '#69C3F0',
-									'--hover-opacity': 1,
-								}}
-							>
-								{data.title[storedLanguage]}
-							</div>
-							<div
-								className='
-							name pt-1 pb-2 px-2 font-semibold text-xs overflow-ellipsis'
-								style={{
-									'--name-colour': data.coverImage.color
-										? data.coverImage.color
-										: '#69C3F0',
-									'--name-opacity': 1,
-								}}
-							>
-								{data.studios.nodes.map((element, index) => (
-									<span key={index}>
-										{element.name}
-										{''}
-										{index !==
-											data.studios.nodes.length - 1 &&
-											', '}
-									</span>
-								))}
-							</div>
-						</div>
-
-						<img
-							src={data.coverImage.extraLarge}
-							className='h-full w-full'
-						/>
-					</a>
-				</Link>
-			</div>
-
-			<div className='flex flex-col w-full bg-theme-secondary'>
-				<div className='flex flex-col h-5/6 mx-4 mt-4'>
-					{/* 1 */}
-					<div className='flex justify-between group-hover:hidden'>
-						<div className='flex justify-start w-11/12 2xl:w-4/5'>
-							<div className='flex flex-col w-full'>
-								<div className='text-theme-base xs:text-xs text-sm font-semibold'>
-									{data.airingSchedule.nodes[0]
-										? `Ep ${data.airingSchedule.nodes[0].episode} airing in`
-										: data.status === 'FINISHED'
-										? data.episodes === 1
-											? `${data.episodes} Episode aired on`
-											: `${data.episodes} Episodes aired on`
-										: 'Airing in'}
-								</div>
-								<div
-									className='text-theme-base text-xl xl:text-base xs:text-base
-								 font-semibold w-11/12 overflow'
-								>
-									{data.airingSchedule.nodes[0]
-										? moment
-												.duration(
-													moment(
-														data.airingSchedule
-															.nodes[0].airingAt *
-															1000
-													).diff(moment())
-												)
-												.format(
-													'd [days,]h [hours,]m [mins]'
-												)
-												.split(',')
-												.slice(0, 2)
-												.join(', ')
-										: moment(
-												data.startDate.month,
-												'MM'
-										  ).format('MMMM') +
-										  ' ' +
-										  data.startDate.year}
-								</div>
-								<div className='w-11/12'>
-									{data.relations.edges && (
-										<div className='text-theme-base text-xs font-semibold  overflow-hidden overflow-ellipsis'>
-											{data.relations.edges.find(
-												(t) =>
-													t.relationType === 'PREQUEL'
-											) !== undefined ? (
-												'Sequel to ' +
-												data.relations.edges.find(
-													(t) =>
-														t.relationType ===
-														'PREQUEL'
-												).node.title.romaji
-											) : (
-												<div className='capitalize'>
-													Source • {data.source}
-												</div>
-											)}
-										</div>
-									)}
-								</div>
-							</div>
-						</div>
-						<div className='flex justify-end w-1/12'>
-							<div className='flex flex-col'>
-								<div className='sm:flex hidden'>
-									{data.averageScore && (
-										<>
-											<div>
-												{data.averageScore >= 75 && (
-													<EmojiHappyIcon className='h-6 w-6 text-green-500 font-bold' />
-												)}
-												{data.averageScore <= 74 &&
-													data.averageScore >= 61 && (
-														<EmojiHappyIcon className='h-6 w-6 text-[#f79a63] font-bold' />
-													)}
-												{data.averageScore <= 60 && (
-													<EmojiSadIcon className='h-6 w-6 text-red-500 font-bold' />
-												)}
-											</div>
-											<div className='text-theme-base text-sm font-semibold ml-2'>
-												{data.averageScore}%
-											</div>
-										</>
-									)}
-								</div>
-								<div className='sm:flex hidden'>
-									{data.rankings && (
-										<>
-											{data.rankings.find(
-												(t) =>
-													t.season !== null &&
-													t.type === 'POPULAR'
-											) !== undefined && (
-												<div>
-													<HeartIcon className='h-6 w-6 text-red-600' />
-												</div>
-											)}
-											<div className='text-theme-base text-sm font-bold ml-2'>
-												{data.rankings.find(
-													(t) =>
-														t.season !== null &&
-														t.type === 'POPULAR'
-												) !== undefined &&
-													'#' +
-														data.rankings.find(
-															(t) =>
-																t.season !==
-																	null &&
-																t.type ===
-																	'POPULAR'
-														).rank}
-											</div>
-										</>
-									)}
-								</div>
-							</div>
-						</div>
-					</div>
-					{/* 1 */}
-					{/* 2 */}
-					<div className='justify-between hidden group-hover:flex transition duration-500 ease-in-out'>
-						<div className='flex justify-start w-11/12 2xl:w-4/5'>
-							<div className='flex flex-col w-full'>
-								<div className='text-theme-base text-xl xl:text-base xs:text-base font-semibold'>
-									{data.hashtag && data.hashtag.split(' ')[0]}
-								</div>
-								<div
-									className='text-theme-base text-xl xl:text-base xs:text-base
-								 font-semibold w-11/12 overflow'
-								>
-									links
-								</div>
-							</div>
-						</div>
-						<div className='flex justify-end w-4/12'>
-							<div className='flex flex-col'>
-								<div className='sm:flex hidden'>
-									{data.trailer && (
-										<Link href={data.trailer.id}>
-											<a className='group'>
-												<img
-													src={`${data.trailer.thumbnail}`}
-													alt=''
-													style={{
-														height: '75px',
-														width: '360px',
-													}}
-												/>
-											</a>
-										</Link>
-									)}
-								</div>
-							</div>
-						</div>
-					</div>
-					{/* 2 */}
-					<div className='relative'>
-						<p className='absolute text-theme-base text-xs mt-2 line-clamp-6 group-hover:line-clamp-10 '>
-							{data.description && parse(data.description)}
-						</p>
-					</div>
+		<div className='w-full sm:h-72 xs:h-60 max-h-72 group transition duration-500 ease-in-out drop-shadow-xl hover:drop-shadow-2xl'>
+			<div className='flex rounded-md overflow-hidden h-full '>
+				<div className='w-2/5 relative z-50'>
+					<ImageHeader
+						storedProvider={storedProvider}
+						siteUrl={data.siteId}
+						idMal={data.idMal}
+						coverImage={data.coverImage.extraLarge}
+						title={
+							data.title[storedLanguage] ??
+							data.title.romaji ??
+							data.title.native
+						}
+						colour={data.coverImage.color}
+						studios={data.studios.nodes}
+					/>
 				</div>
-				<div className='relative pb-10 h-3 bg-theme-tertiary'>
-					<div className='flex'>
-						<div className='flex overflow-hidden ml-1 mt-2 w-full'>
-							{data.genres &&
-								data.genres.slice(0, 2).map((element) => (
-									<div
-										className='genre rounded-full px-3 h-6 flex items-center mx-1 text-xs'
-										style={{
-											'--genre-colour': data.coverImage
-												.color
-												? data.coverImage.color
-												: '#69C3F0',
-											'--genre-opacity': 1,
-										}}
-									>
-										{element}
-									</div>
-								))}
+				<div className='w-3/5'>
+					<div className='h-5/6 bg-theme-secondary p-4 pb-2'>
+						<div className='h-1/4 xs:h-2/6 flex relative'>
+							<div className='w-full absolute -right-96 transition-all duration-500 ease-in-out group-hover:right-0 flex'>
+								<AdditionalInfo
+									hashtag={data.hashtag}
+									links='links'
+									trailer={data.trailer}
+								/>
+							</div>
+							<div className='absolute left-0 transition-all duration-500 ease-in-out group-hover:-left-96 z-10 flex w-full'>
+								<div className='w-10/12 2xl:w-4/5 overflow-hidden overflow-ellipsis '>
+									<AiringEpisodeInfo
+										schedule={data.airingSchedule.nodes[0]}
+										status={data.status}
+										episodes={data.episodes}
+									/>
+									<AiringScheduleInfo
+										schedule={data.airingSchedule.nodes[0]}
+										startDate={data.startDate}
+									/>
+									<AiringSourceInfo
+										relations={data.relations.edges}
+										storedLanguage={storedLanguage}
+										source={data.source}
+									/>
+								</div>
+								<div className='w-2/12 2xl:w-1/5 sm:flex hidden flex-col mr-1'>
+									<Rankings
+										averageScore={data.averageScore}
+										rankings={data.rankings}
+									/>
+								</div>
+							</div>
 						</div>
-						<div className='flex justify-end w-3/12 mt-1 items-center'>
-							<PlusCircleIcon className='h-6 w-6 text-theme-base font-bold mr-3' />
+						<div className='h-3/4 xs:h-4/6'>
+							<p className='text-theme-base text-xs mt-2 line-clamp-6 group-hover:line-clamp-9 transition duration-300 ease-in-out'>
+								{data.description && parse(data.description)}
+							</p>
+						</div>
+					</div>
+					<div className='h-1/6 bg-theme-tertiary flex'>
+						<div className='overflow-hidden w-9/12 flex items-center ml-2 flex-wrap h-full'>
+							<GenreInfo
+								genres={data.genres}
+								colour={data.coverImage.color}
+							/>
+						</div>
+						<div className='w-3/12 items-center flex justify-center'>
+							<PlusCircleIcon className='h-6 w-6 text-theme-base font-bold' />
 						</div>
 					</div>
 				</div>
