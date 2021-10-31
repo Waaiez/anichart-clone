@@ -10,7 +10,7 @@ class MyDocument extends Document {
                         rel="stylesheet"
                     />
                 </Head>
-                <body>
+                <body className='font-overpass'>
                     <Main />
                     <NextScript />
                 </body>

@@ -1,29 +1,27 @@
-import moment from 'moment';
-import momentDurationFormatSetup from 'moment-duration-format';
-import { PlusCircleIcon } from '@heroicons/react/outline';
-import parse from 'html-react-parser';
-import { useStorage } from '../../context/StorageContext';
-import ImageHeader from './ImageHeader';
+import AdditionalInfo from './AdditionalInfo';
 import AiringEpisodeInfo from './AiringEpisodeInfo';
 import AiringScheduleInfo from './AiringScheduleInfo';
 import AiringSourceInfo from './AiringSourceInfo';
-import Rankings from './Rankings';
 import GenreInfo from './GenreInfo';
-import AdditionalInfo from './AdditionalInfo';
+import ImageHeader from './ImageHeader';
+import { PlusCircleIcon } from '@heroicons/react/outline';
+import Rankings from './Rankings';
+import parse from 'html-react-parser';
+import { useStorage } from '../../context/StorageContext';
 
 export default function Card({ data }) {
 	const { getItem } = useStorage();
 	const storedLanguage = getItem('language');
 	const storedProvider = getItem('provider');
-	momentDurationFormatSetup(moment);
 	console.log(data);
+
 	return (
-		<div className='w-full sm:h-72 xs:h-60 max-h-72 group transition duration-500 ease-in-out drop-shadow-xl hover:drop-shadow-2xl'>
-			<div className='flex rounded-md overflow-hidden h-full '>
-				<div className='w-2/5 relative z-50'>
+		<div className='relative w-full transition duration-500 ease-in-out sm:h-72 xs:h-60 max-h-72 group drop-shadow-xl hover:drop-shadow-2xl'>
+			<div className='relative flex h-full overflow-hidden rounded-md'>
+				<div className='relative z-50 w-2/5'>
 					<ImageHeader
 						storedProvider={storedProvider}
-						siteUrl={data.siteId}
+						siteUrl={data.siteUrl}
 						idMal={data.idMal}
 						coverImage={data.coverImage.extraLarge}
 						title={
@@ -36,17 +34,17 @@ export default function Card({ data }) {
 					/>
 				</div>
 				<div className='w-3/5'>
-					<div className='h-5/6 bg-theme-secondary p-4 pb-2'>
-						<div className='h-1/4 xs:h-2/6 flex relative'>
-							<div className='w-full absolute -right-96 transition-all duration-500 ease-in-out group-hover:right-0 flex'>
+					<div className='p-4 pb-2 h-5/6 bg-theme-secondary'>
+						<div className='relative flex h-1/4 xs:h-2/6'>
+							<div className='absolute flex w-full transition-all duration-500 ease-in-out -right-96 group-hover:right-0'>
 								<AdditionalInfo
 									hashtag={data.hashtag}
-									links='links'
+									links={data.externalLinks}
 									trailer={data.trailer}
 								/>
 							</div>
-							<div className='absolute left-0 transition-all duration-500 ease-in-out group-hover:-left-96 z-10 flex w-full'>
-								<div className='w-10/12 2xl:w-4/5 overflow-hidden overflow-ellipsis '>
+							<div className='absolute left-0 z-10 flex w-full transition-all duration-500 ease-in-out group-hover:-left-96'>
+								<div className='w-10/12 overflow-hidden 2xl:w-4/5 overflow-ellipsis '>
 									<AiringEpisodeInfo
 										schedule={data.airingSchedule.nodes[0]}
 										status={data.status}
@@ -62,7 +60,7 @@ export default function Card({ data }) {
 										source={data.source}
 									/>
 								</div>
-								<div className='w-2/12 2xl:w-1/5 sm:flex hidden flex-col mr-1'>
+								<div className='flex-col hidden w-2/12 mr-1 2xl:w-1/5 sm:flex'>
 									<Rankings
 										averageScore={data.averageScore}
 										rankings={data.rankings}
@@ -71,20 +69,20 @@ export default function Card({ data }) {
 							</div>
 						</div>
 						<div className='h-3/4 xs:h-4/6'>
-							<p className='text-theme-base text-xs mt-2 line-clamp-6 group-hover:line-clamp-9 transition duration-300 ease-in-out'>
+							<p className='mt-2 text-xs text-theme-base line-clamp-6 group-hover:line-clamp-9 '>
 								{data.description && parse(data.description)}
 							</p>
 						</div>
 					</div>
-					<div className='h-1/6 bg-theme-tertiary flex'>
-						<div className='overflow-hidden w-9/12 flex items-center ml-2 flex-wrap h-full'>
+					<div className='flex h-1/6 bg-theme-tertiary'>
+						<div className='flex flex-wrap items-center w-9/12 h-full ml-2 overflow-hidden'>
 							<GenreInfo
 								genres={data.genres}
 								colour={data.coverImage.color}
 							/>
 						</div>
-						<div className='w-3/12 items-center flex justify-center'>
-							<PlusCircleIcon className='h-6 w-6 text-theme-base font-bold' />
+						<div className='flex items-center justify-center w-3/12'>
+							<PlusCircleIcon className='w-6 h-6 font-bold text-theme-base' />
 						</div>
 					</div>
 				</div>

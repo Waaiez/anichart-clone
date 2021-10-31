@@ -1,21 +1,32 @@
 import {
-	CalendarIcon,
 	ArchiveIcon,
+	CalendarIcon,
 	ChevronDoubleRightIcon,
 	CogIcon,
 } from '@heroicons/react/outline';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import NavLinkMD from './NavLinkMD';
 
-function NavbarMD({ seasonYear, currentYear, currentSeason, currentPath }) {
+function NavbarMD({ season, currentPath, currentLocation }) {
 	return (
-		<div className='hidden md:block select-none '>
+		<div className='hidden select-none md:block'>
 			{/* Backround behind Navbar */}
+			<div className='absolute inset-x-0 top-0 z-20 justify-center text-center text-white bg-red-500 h-7 animate-pulse'>
+				This is an <span className='font-bold'>UNOFFICAL</span> clone of
+				Anichart. Visit the <span className='font-bold'>OFFICAL</span>{' '}
+				site at{' '}
+				<Link href='https://anichart.net/'>
+					<a className='text-blue-600 underline hover:text-blue-800'>
+						https://anichart.net/
+					</a>
+				</Link>
+			</div>
 			<div className='bg-[#2b2d42] h-56 z-10 absolute inset-x-0 top-0'></div>
-			<div className='flex justify-between md:mx-10 lg:mx-16 my-10 h-11 navbar z-30 relative'>
+			<div className='relative z-30 flex justify-between my-10 md:mx-10 lg:mx-16 h-11 navbar'>
 				{/* Logo */}
-				<div className='w-full flex justify-center anichartLogo'>
+				<div className='flex justify-center w-full anichartLogo'>
 					<Link href='/'>
 						<a>
 							<Image
@@ -28,39 +39,39 @@ function NavbarMD({ seasonYear, currentYear, currentSeason, currentPath }) {
 					</Link>
 				</div>
 
-				<div className='w-full flex seasons text-center justify-center'>
+				<div className='flex justify-center w-full text-center seasons'>
 					<NavLinkMD
-						link={`/WINTER-${seasonYear}`}
+						link={`/WINTER-${season.WINTER.year}`}
 						text='Winter'
-						path={currentSeason.split('-')[0]}
+						path={currentLocation.split('-')[0]}
 						pathMatch='WINTER'
-						year={seasonYear}
+						year={season.WINTER.year}
 					/>
 					<NavLinkMD
-						link={`/SPRING-${seasonYear}`}
+						link={`/SPRING-${season.SPRING.year}`}
 						text='Spring'
-						path={currentSeason.split('-')[0]}
+						path={currentLocation.split('-')[0]}
 						pathMatch='SPRING'
-						year={seasonYear}
+						year={season.SPRING.year}
 					/>
 					<NavLinkMD
-						link={`/SUMMER-${currentYear}`}
+						link={`/SUMMER-${season.SUMMER.year}`}
 						text='Summer'
-						path={currentSeason.split('-')[0]}
+						path={currentLocation.split('-')[0]}
 						pathMatch='SUMMER'
-						year={currentYear}
+						year={season.SUMMER.year}
 					/>
 					<NavLinkMD
-						link={`/FALL-${currentYear}`}
+						link={`/FALL-${season.FALL.year}`}
 						text='Fall'
-						path={currentSeason.split('-')[0]}
+						path={currentLocation.split('-')[0]}
 						pathMatch='FALL'
-						year={currentYear}
+						year={season.FALL.year}
 					/>
 				</div>
 
 				{/* Charts */}
-				<div className='w-full flex charts text-center justify-center'>
+				<div className='flex justify-center w-full text-center charts'>
 					<NavLinkMD
 						link={`/airing`}
 						icon='calendarIcon'

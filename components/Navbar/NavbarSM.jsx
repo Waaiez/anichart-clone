@@ -1,9 +1,10 @@
+import Link from 'next/link';
 import { MenuIcon } from '@heroicons/react/outline';
-import { useState } from 'react';
-import { Switch } from '@headlessui/react';
 import NavLinkSM from './NavLinkSM';
+import { Switch } from '@headlessui/react';
+import { useState } from 'react';
 
-function NavbarSM({ seasonYear, currentYear, currentSeason, currentPath }) {
+function NavbarSM({ season, currentPath, currentLocation }) {
 	const [isShowing, setIsShowing] = useState(false);
 
 	return (
@@ -12,38 +13,49 @@ function NavbarSM({ seasonYear, currentYear, currentSeason, currentPath }) {
 			<div className='fixed md:hidden -inset-0.5 bottom-0 pt-8 pb-5 px-5 flex justify-items-start shadow-2xl sm-nav-wrap select-none '></div>
 			{/* Shadow behind Navbar */}
 
-			<div className='md:hidden fixed inset-x-0 bottom-0 pt-8 pb-5 px-5 flex justify-items-start shadow-2xl sm-nav-wrap z-50 select-none '>
+			<div className='fixed inset-x-0 bottom-0 z-50 h-5 text-sm text-center text-white bg-red-500 md:hidden animate-pulse'>
+				This is an <span className='font-bold'>UNOFFICAL</span> clone of
+				Anichart. Visit the <span className='font-bold'>OFFICAL</span>{' '}
+				site at{' '}
+				<Link href='https://anichart.net/'>
+					<a className='text-blue-600 underline hover:text-blue-800'>
+						https://anichart.net/
+					</a>
+				</Link>
+			</div>
+
+			<div className='fixed inset-x-0 bottom-0 z-40 flex px-5 pt-8 pb-5 shadow-2xl select-none md:hidden justify-items-start sm-nav-wrap '>
 				{/* Menu 1 - seasons */}
-				<div className=' absolute bg-theme-secondary blur h-28 opacity-95 w-full inset-x-0 bottom-0'></div>
+				<div className='absolute inset-x-0 bottom-0 w-full bg-theme-secondary blur h-28 opacity-95'></div>
 				{!isShowing && (
 					<>
 						<div className='relative bg-[#2b2d42] h-14 w-full z-100 rounded-md mr-5 flex justify-evenly shadow-2xl sm-seasons'>
 							<NavLinkSM
-								link={`/WINTER-${seasonYear}`}
+								link={`/WINTER-${season.WINTER.year}`}
 								icon='winterIcon'
 								iconText='Winter'
-								path={currentSeason.split('-')[0]}
+								path={currentLocation.split('-')[0]}
 								pathMatch='WINTER'
 							/>
 							<NavLinkSM
-								link={`/SPRING-${seasonYear}`}
+								link={`/SPRING-${season.SPRING.year}`}
 								icon='springIcon'
 								iconText='Spring'
-								path={currentSeason.split('-')[0]}
+								path={currentLocation.split('-')[0]}
 								pathMatch='SPRING'
 							/>
 							<NavLinkSM
-								link={`/SUMMER-${currentYear}`}
+								link={`/SUMMER-${season.SUMMER.year}`}
 								icon='summerIcon'
 								iconText='Summer'
-								path={currentSeason.split('-')[0]}
+								path={currentLocation.split('-')[0]}
 								pathMatch='SUMMER'
 							/>
 							<NavLinkSM
-								link={`/FALL-${currentYear}`}
+								link={`/FALL-${season.FALL.year}`}
 								icon='fallIcon'
 								iconText='Fall'
-								path={currentSeason.split('-')[0]}
+								path={currentLocation.split('-')[0]}
 								pathMatch='FALL'
 							/>
 						</div>
@@ -86,7 +98,7 @@ function NavbarSM({ seasonYear, currentYear, currentSeason, currentPath }) {
 				{/* Menu Icon */}
 				<Switch checked={isShowing} onChange={setIsShowing}>
 					<div className='relative bg-[#2b2d42] h-14 w-16 z-100 rounded-md flex items-center justify-center shadow-2xl sm-menu'>
-						<MenuIcon className='text-white h-10 z-100' />
+						<MenuIcon className='h-10 text-white z-100' />
 					</div>
 				</Switch>
 			</div>

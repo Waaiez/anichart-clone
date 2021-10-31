@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 const StorageContext = React.createContext();
 
@@ -11,46 +11,54 @@ export function StorageProvider({ children }) {
 	const [theme, setTheme] = useState();
 	const [language, setLanguage] = useState();
 	const [provider, setProvider] = useState();
+	const [sortOption, setSortOption] = useState();
 
 	useEffect(() => {
 		setIsLoading(true);
+		if (typeof window !== 'undefined') {
+			if (localStorage.theme) {
+				setTheme(getItem('theme'));
+			} else {
+				setItem('theme', 'theme-light');
+				setTheme('theme-light');
+			}
 
-		if (localStorage.theme) {
-			setTheme(getItem('theme'));
-		} else {
-			setItem('theme', 'theme-light');
-			setTheme('theme-light');
+			if (localStorage.language) {
+				setLanguage(getItem('language'));
+			} else {
+				setItem('language', 'romaji');
+				setLanguage('romaji');
+			}
+
+			if (localStorage.provider) {
+				setProvider(getItem('provider'));
+			} else {
+				setItem('provider', 'anilist');
+				setProvider('anilist');
+			}
+
+			if (localStorage.sortOption) {
+				setProvider(getItem('sortOption'));
+			} else {
+				setItem('sortOption', 'POPULARITY_DESC');
+				setSortOption('POPULARITY_DESC');
+			}
 		}
-
-		if (localStorage.language) {
-			setLanguage(getItem('language'));
-		} else {
-			setItem('language', 'romaji');
-			setLanguage('romaji');
-		}
-
-		if (localStorage.provider) {
-			setProvider(getItem('provider'));
-		} else {
-			setItem('provider', 'anilist');
-			setProvider('anilist');
-		}
-
 		document.documentElement.classList.add(theme);
 		setIsLoading(false);
 	}, []);
 
 	function getItem(name) {
-		const data = localStorage.getItem(name);
+		const data = window.localStorage.getItem(name);
 		return data;
 	}
 
 	function setItem(name, data) {
-		localStorage.setItem(name, data);
+		window.localStorage.setItem(name, data);
 	}
 	function setLocalTheme(name) {
 		document.documentElement.classList.replace(theme, name);
-		localStorage.setItem('theme', name);
+		window.localStorage.setItem('theme', name);
 		setTheme(name);
 	}
 
@@ -58,6 +66,7 @@ export function StorageProvider({ children }) {
 		theme,
 		language,
 		provider,
+		sortOption,
 		getItem,
 		setItem,
 		setLocalTheme,

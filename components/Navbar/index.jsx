@@ -1,28 +1,17 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import NavbarSM from './NavbarSM';
-import NavbarMD from './NavbarMD';
+import { useEffect, useState } from 'react';
 
-function getSeason() {
-	let d = new Date();
-	let season = d.getMonth() + 1;
-	[10, 7, 4, 1].every((val) => {
-		if (season >= val) {
-			season = val;
-			return false;
-		}
-		return true;
-	});
-	if (season > 4) {
-		return d.getFullYear() + 1;
-	} else return d.getFullYear();
-}
+import NavbarMD from './NavbarMD';
+import NavbarSM from './NavbarSM';
+import { animeSeason } from '../../lib/animeSeason';
+import { useRouter } from 'next/router';
 
 export default function Navbar() {
 	const router = useRouter();
 
 	const [fullSeason, setFullSeason] = useState('');
 	const [path, setPath] = useState('');
+
+	const { season } = animeSeason();
 
 	useEffect(() => {
 		router.query.season && setFullSeason(router.query.season);
@@ -32,17 +21,15 @@ export default function Navbar() {
 	return (
 		<>
 			<NavbarSM
-				seasonYear={getSeason()}
-				currentYear={new Date().getFullYear()}
-				currentSeason={fullSeason}
+				season={season}
 				currentPath={path}
+				currentLocation={fullSeason}
 			/>
 
 			<NavbarMD
-				seasonYear={getSeason()}
-				currentYear={new Date().getFullYear()}
-				currentSeason={fullSeason}
+				season={season}
 				currentPath={path}
+				currentLocation={fullSeason}
 			/>
 		</>
 	);

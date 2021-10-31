@@ -3,7 +3,7 @@ function AiringSourceInfo({ relations, storedLanguage, source }) {
 	return (
 		<div>
 			{relations && (
-				<div className='text-theme-base text-xs font-semibold'>
+				<div className='text-xs font-semibold truncate text-theme-base'>
 					{prequelInfo !== undefined ? (
 						'Sequel to ' +
 						(prequelInfo.node.title[storedLanguage] ??
@@ -11,7 +11,9 @@ function AiringSourceInfo({ relations, storedLanguage, source }) {
 							prequelInfo.node.tite.native)
 					) : (
 						<span className='capitalize'>
-							Source • {source.toLowerCase().split('_').join(' ')}
+							{source &&
+								'Source • ' +
+									source.toLowerCase().split('_').join(' ')}
 						</span>
 					)}
 				</div>

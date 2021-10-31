@@ -1,11 +1,31 @@
-const query = `
-query ($season: MediaSeason, $year: Int, $format: MediaFormat, $excludeFormat: MediaFormat, $status: MediaStatus, $minEpisodes: Int, $page: Int, $sort: [MediaSort]) {
-  Page(page: $page) {
+import { gql } from 'graphql-request'
+
+const query = gql`
+query ($season: MediaSeason, $year: Int, $previousSeason: MediaSeason, $previousYear: Int, $format: MediaFormat, $excludeFormat: MediaFormat, $status: MediaStatus, $minEpisodes: Int, $page: Int, $sort: [MediaSort]) {
+  tv: Page(page: $page) {
     pageInfo {
       hasNextPage
       total
     }
-    media(season: $season, seasonYear: $year, format: $format, format_not: $excludeFormat, status: $status, episodes_greater: $minEpisodes, isAdult: false, type: ANIME, sort: $sort) {
+    media(season: $season, seasonYear: $year, format: TV, format_not: $excludeFormat, status: $status, episodes_greater: $minEpisodes, isAdult: false, type: ANIME, sort: $sort) {
+      ...media
+    }
+  }
+  rest: Page(page: $page) {
+    pageInfo {
+      hasNextPage
+      total
+    }
+    media(season: $season, seasonYear: $year, format: $format, format_not: TV, status: $status, episodes_greater: $minEpisodes, isAdult: false, type: ANIME, sort: $sort) {
+      ...media
+    }
+  }
+  leftovers: Page(page: $page) {
+    pageInfo {
+      hasNextPage
+      total
+    }
+    media(season: $previousSeason, seasonYear: $previousYear, format: $format, format_not: $excludeFormat, status: $status, episodes_greater: 16, isAdult: false, type: ANIME, sort: $sort) {
       ...media
     }
   }

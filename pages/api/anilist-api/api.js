@@ -9,7 +9,7 @@ const api = (query, variables) =>
         .request(query, variables)
         .then(data => data)
         .catch(error => ({
-            error: error.message
+            error: console.log(error.message)
         }));
 
 export default api;

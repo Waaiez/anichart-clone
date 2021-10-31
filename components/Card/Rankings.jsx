@@ -13,16 +13,16 @@ function Rankings({ averageScore, rankings }) {
 					<>
 						<div>
 							{averageScore >= 75 && (
-								<EmojiHappyIcon className='h-6 w-6 text-green-500 font-bold' />
+								<EmojiHappyIcon className='w-6 h-6 font-bold text-green-500' />
 							)}
 							{averageScore <= 74 && averageScore >= 61 && (
 								<EmojiHappyIcon className='h-6 w-6 text-[#f79a63] font-bold' />
 							)}
 							{averageScore <= 60 && (
-								<EmojiSadIcon className='h-6 w-6 text-red-500 font-bold' />
+								<EmojiSadIcon className='w-6 h-6 font-bold text-red-500' />
 							)}
 						</div>
-						<div className='text-theme-base text-sm font-semibold ml-1'>
+						<div className='ml-1 text-sm font-semibold text-theme-base'>
 							{averageScore}%
 						</div>
 					</>
@@ -35,10 +35,10 @@ function Rankings({ averageScore, rankings }) {
 							(t) => t.season !== null && t.type === 'POPULAR'
 						) !== undefined && (
 							<div>
-								<HeartIcon className='h-6 w-6 text-red-600' />
+								<HeartIcon className='w-6 h-6 text-red-600' />
 							</div>
 						)}
-						<div className='text-theme-base text-sm font-bold ml-2'>
+						<div className='flex items-center ml-2 text-sm font-bold text-theme-base'>
 							{rankings.find(
 								(t) => t.season !== null && t.type === 'POPULAR'
 							) !== undefined &&
