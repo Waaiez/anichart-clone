@@ -71,7 +71,7 @@ export default function Card({ data }) {
 							</div>
 						</div>
 						<div className='h-3/4 xs:h-4/6'>
-							<p className='mt-2 text-xs text-theme-base line-clamp-6 group-hover:line-clamp-9 '>
+							<p className='mt-2 text-xs text-theme-base line-clamp-6 md:group-hover:line-clamp-9 group-hover:line-clamp-7 '>
 								{data.description && parse(data.description)}
 							</p>
 						</div>

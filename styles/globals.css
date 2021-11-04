@@ -42,3 +42,7 @@
 	background-color: var(--genre-colour) !important;
 	opacity: var(--genre-opacity);
 }
+
+.statusPopup:hover > .statusPopupContainer {
+	display: block;
+}

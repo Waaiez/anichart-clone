@@ -37,9 +37,9 @@ function StatusPopup() {
 	const [isShowing, setIsShowing] = useState(false);
 	return (
 		<>
-			<div className='relative items-center justify-end w-10 h-10 md:flex group-status sm:hidden'>
+			<div className='relative items-center justify-end hidden w-10 h-10 md:flex statusPopup'>
 				<PlusCircleIcon className='w-6 h-6 font-bold text-theme-base' />
-				<div className='absolute z-50 hidden w-40 text-center transition duration-300 ease-in-out rounded-md shadow-md h-28 bottom-10 -right-2 group-status-hover:block bg-theme-secondary'>
+				<div className='absolute z-50 hidden w-40 text-center transition duration-300 ease-in-out rounded-md shadow-md bg-theme-secondary h-28 bottom-10 -right-2 sm:hidden statusPopupContainer'>
 					<PopupContent />
 				</div>
 			</div>
