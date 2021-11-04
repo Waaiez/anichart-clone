@@ -1,7 +1,8 @@
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import { LoadingIcon } from '../components';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+
+import { LoadingIcon } from '../components';
 import { animeSeason } from '../lib/animeSeason';
 
 export default function Home() {
@@ -15,7 +16,7 @@ export default function Home() {
 
 		if (isLoading === false)
 			router.push(`${currentSeason}-${currentSeasonYear}`);
-	}, [isLoading, router]);
+	}, [isLoading]);
 
 	return (
 		<>

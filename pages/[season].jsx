@@ -1,14 +1,14 @@
 import { CameraIcon, SearchIcon, ShareIcon } from '@heroicons/react/outline';
-import { CardList, DataSection, Navbar, SearchBar } from '../components';
-import { useEffect, useState } from 'react';
-
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { TiArrowUnsorted } from 'react-icons/ti';
+
+import { CardList, DataSection, Navbar, SearchBar } from '../components';
+import { useData } from '../context/DataContext';
+import { useStorage } from '../context/StorageContext';
 import { getPreviousSeason } from '../lib/animeSeason';
 import search from './api/anilist-api/queries/season';
-import { useData } from '../context/DataContext';
-import { useRouter } from 'next/router';
-import { useStorage } from '../context/StorageContext';
 
 function Season() {
 	const router = useRouter();
@@ -30,8 +30,12 @@ function Season() {
 
 	useEffect(() => {
 		let allowedUrls = ['WINTER', 'SPRING', 'SUMMER', 'FALL'];
-		router.query.season && new RegExp(allowedUrls.join("|")).test(router.query.season) ? setFullSeason(router.query.season) : router.push('/')
-	}, [router.query.season]);
+		console.log('route1', router.query.season);
+		router.query.season !== undefined &&
+			(new RegExp(allowedUrls.join('|')).test(router.query.season)
+				? setFullSeason(router.query.season)
+				: router.push('/'));
+	}, [router]);
 
 	useEffect(() => {
 		fullSeason && getData(fullSeason, storedSortOption);

@@ -1,8 +1,9 @@
-import Link from 'next/link';
-import { MenuIcon } from '@heroicons/react/outline';
-import NavLinkSM from './NavLinkSM';
 import { Switch } from '@headlessui/react';
+import { MenuIcon } from '@heroicons/react/outline';
+import Link from 'next/link';
 import { useState } from 'react';
+
+import NavLinkSM from './NavLinkSM';
 
 function NavbarSM({ season, currentPath, currentLocation }) {
 	const [isShowing, setIsShowing] = useState(false);

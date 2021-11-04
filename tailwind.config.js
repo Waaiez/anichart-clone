@@ -5,6 +5,7 @@ module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    namedGroups: ['status'],
     screens: {
       'xs': '375px',
       ...defaultTheme.screens,
@@ -38,5 +39,5 @@ module.exports = {
       lineClamp: ['hover']
     },
   },
-  plugins: [require('@tailwindcss/line-clamp'),],
+  plugins: [require('@tailwindcss/line-clamp'), require('tailwindcss-named-groups'),],
 }

@@ -1,13 +1,15 @@
+import { PlusCircleIcon } from '@heroicons/react/outline';
+import parse from 'html-react-parser';
+
+import { useStorage } from '../../context/StorageContext';
 import AdditionalInfo from './AdditionalInfo';
 import AiringEpisodeInfo from './AiringEpisodeInfo';
 import AiringScheduleInfo from './AiringScheduleInfo';
 import AiringSourceInfo from './AiringSourceInfo';
 import GenreInfo from './GenreInfo';
 import ImageHeader from './ImageHeader';
-import { PlusCircleIcon } from '@heroicons/react/outline';
 import Rankings from './Rankings';
-import parse from 'html-react-parser';
-import { useStorage } from '../../context/StorageContext';
+import StatusPopup from './StatusPopup';
 
 export default function Card({ data }) {
 	const { getItem } = useStorage();
@@ -16,8 +18,8 @@ export default function Card({ data }) {
 	console.log(data);
 
 	return (
-		<div className='relative w-full transition duration-500 ease-in-out sm:h-72 xs:h-60 max-h-72 group drop-shadow-xl hover:drop-shadow-2xl'>
-			<div className='relative flex h-full overflow-hidden rounded-md'>
+		<div className='relative w-full transition duration-500 ease-in-out sm:h-72 xs:h-60 max-h-72 drop-shadow-xl hover:drop-shadow-2xl'>
+			<div className='relative flex h-full overflow-hidden rounded-md group'>
 				<div className='relative z-50 w-2/5'>
 					<ImageHeader
 						storedProvider={storedProvider}
@@ -82,7 +84,8 @@ export default function Card({ data }) {
 							/>
 						</div>
 						<div className='flex items-center justify-center w-3/12'>
-							<PlusCircleIcon className='w-6 h-6 font-bold text-theme-base' />
+							{/* <PlusCircleIcon className='w-6 h-6 font-bold text-theme-base' /> */}
+							<StatusPopup />
 						</div>
 					</div>
 				</div>
