@@ -38,14 +38,14 @@ export default function Card({ data }) {
 				<div className='w-3/5'>
 					<div className='p-4 pb-2 h-5/6 bg-theme-secondary'>
 						<div className='relative flex h-1/4 xs:h-2/6'>
-							<div className='absolute flex w-full transition-all duration-500 ease-in-out -right-96 group-hover:right-0'>
+							<div className='absolute flex w-full transition-all duration-700 ease-in-out -right-96 group-hover:right-0'>
 								<AdditionalInfo
 									hashtag={data.hashtag}
 									links={data.externalLinks}
 									trailer={data.trailer}
 								/>
 							</div>
-							<div className='absolute left-0 z-10 flex w-full transition-all duration-500 ease-in-out group-hover:-left-96'>
+							<div className='absolute left-0 z-10 flex w-full transition-all duration-700 ease-in-out group-hover:-left-96'>
 								<div className='w-10/12 overflow-hidden 2xl:w-4/5 overflow-ellipsis '>
 									<AiringEpisodeInfo
 										schedule={data.airingSchedule.nodes[0]}
