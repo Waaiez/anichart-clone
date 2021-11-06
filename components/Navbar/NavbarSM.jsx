@@ -29,38 +29,36 @@ function NavbarSM({ season, currentPath, currentLocation }) {
 				{/* Menu 1 - seasons */}
 				<div className='absolute inset-x-0 bottom-0 w-full bg-theme-secondary blur h-28 opacity-95'></div>
 				{!isShowing && (
-					<>
-						<div className='relative bg-[#2b2d42] h-14 w-full z-100 rounded-md mr-5 flex justify-evenly shadow-2xl sm-seasons'>
-							<NavLinkSM
-								link={`/WINTER-${season.WINTER.year}`}
-								icon='winterIcon'
-								iconText='Winter'
-								path={currentLocation.split('-')[0]}
-								pathMatch='WINTER'
-							/>
-							<NavLinkSM
-								link={`/SPRING-${season.SPRING.year}`}
-								icon='springIcon'
-								iconText='Spring'
-								path={currentLocation.split('-')[0]}
-								pathMatch='SPRING'
-							/>
-							<NavLinkSM
-								link={`/SUMMER-${season.SUMMER.year}`}
-								icon='summerIcon'
-								iconText='Summer'
-								path={currentLocation.split('-')[0]}
-								pathMatch='SUMMER'
-							/>
-							<NavLinkSM
-								link={`/FALL-${season.FALL.year}`}
-								icon='fallIcon'
-								iconText='Fall'
-								path={currentLocation.split('-')[0]}
-								pathMatch='FALL'
-							/>
-						</div>
-					</>
+					<div className='relative bg-[#2b2d42] h-14 w-full z-100 rounded-md mr-5 flex justify-evenly shadow-2xl sm-seasons'>
+						<NavLinkSM
+							link={`/WINTER-${season.WINTER.year}`}
+							icon='winterIcon'
+							iconText='Winter'
+							path={currentLocation.split('-')[0]}
+							pathMatch='WINTER'
+						/>
+						<NavLinkSM
+							link={`/SPRING-${season.SPRING.year}`}
+							icon='springIcon'
+							iconText='Spring'
+							path={currentLocation.split('-')[0]}
+							pathMatch='SPRING'
+						/>
+						<NavLinkSM
+							link={`/SUMMER-${season.SUMMER.year}`}
+							icon='summerIcon'
+							iconText='Summer'
+							path={currentLocation.split('-')[0]}
+							pathMatch='SUMMER'
+						/>
+						<NavLinkSM
+							link={`/FALL-${season.FALL.year}`}
+							icon='fallIcon'
+							iconText='Fall'
+							path={currentLocation.split('-')[0]}
+							pathMatch='FALL'
+						/>
+					</div>
 				)}
 				{/* Menu 2 - charts */}
 				{isShowing && (

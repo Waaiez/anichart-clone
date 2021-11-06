@@ -4,11 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-function renderLinkIcon(site, url) {
+function renderLinkIcon(site, url, index) {
 	switch (site) {
 		case 'Official Site':
 			return (
-				<Link href={url}>
+				<Link href={url} key={index}>
 					<a className='bg-[#515381] rounded-sm w-5 flex items-center justify-center h-5 mx-1'>
 						<Image
 							src='/linkLogo.svg'
@@ -21,7 +21,7 @@ function renderLinkIcon(site, url) {
 			);
 		case 'Funimation':
 			return (
-				<Link href={url}>
+				<Link href={url} key={index}>
 					<a className='bg-[#9e52ff] rounded-sm w-5 flex items-center justify-center h-5 mx-1'>
 						<Image
 							src='/funimationLogo.svg'
@@ -34,7 +34,7 @@ function renderLinkIcon(site, url) {
 			);
 		case 'Hidive':
 			return (
-				<Link href={url}>
+				<Link href={url} key={index}>
 					<a className='bg-[#3db4f2] rounded-sm w-5 flex items-center justify-center h-5 mx-1'>
 						<Image
 							src='/hidiveLogo.svg'
@@ -47,7 +47,7 @@ function renderLinkIcon(site, url) {
 			);
 		case 'Crunchyroll':
 			return (
-				<Link href={url}>
+				<Link href={url} key={index}>
 					<a className='bg-[#f79a63] rounded-sm w-5 flex items-center justify-center h-5 mx-1'>
 						<Image
 							src='/crunchyrollLogo.svg'
@@ -60,7 +60,7 @@ function renderLinkIcon(site, url) {
 			);
 		case 'VRV':
 			return (
-				<Link href={url}>
+				<Link href={url} key={index}>
 					<a className='bg-[#f7bf63] rounded-sm w-5 flex items-center justify-center h-5 mx-1'>
 						<Image
 							src='/vrvLogo.svg'
@@ -73,7 +73,7 @@ function renderLinkIcon(site, url) {
 			);
 		case 'Hulu':
 			return (
-				<Link href={url}>
+				<Link href={url} key={index}>
 					<a className='bg-[#5dc12f] rounded-sm w-5 flex items-center justify-center h-5 mx-1'>
 						<Image
 							src='/huluLogo.svg'
@@ -86,7 +86,7 @@ function renderLinkIcon(site, url) {
 			);
 		case 'Netflix':
 			return (
-				<Link href={url}>
+				<Link href={url} key={index}>
 					<a className='bg-[#e85d75] rounded-sm w-5 flex items-center justify-center h-5 mx-1'>
 						<Image
 							src='/netflixLogo.svg'
@@ -99,7 +99,7 @@ function renderLinkIcon(site, url) {
 			);
 		case 'Youtube':
 			return (
-				<Link href={url}>
+				<Link href={url} key={index}>
 					<a className='bg-[#9e52ff] rounded-sm w-5 flex items-center justify-center h-5 mx-1'>
 						<Image
 							src='/youtubeLogo.svg'
@@ -125,7 +125,7 @@ function AdditionalInfo({ hashtag, links, trailer }) {
 					</div>
 					<div className='flex flex-wrap h-5 overflow-hidden text-xl font-semibold text-theme-base xl:text-base xs:text-base'>
 						{links.map((element, index) =>
-							renderLinkIcon(element.site, element.url)
+							renderLinkIcon(element.site, element.url, index)
 						)}
 					</div>
 				</div>
@@ -138,7 +138,7 @@ function AdditionalInfo({ hashtag, links, trailer }) {
 								checked={isOpen}
 								onChange={setIsOpen}
 								className='relative'>
-								<div className='w-20 min-h-11 h-11 max-h-11'>
+								<div className='relative w-20 min-h-11 h-11 max-h-11'>
 									<Image
 										src={trailer.thumbnail}
 										alt='Trailer Thumbnail'

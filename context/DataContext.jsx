@@ -17,6 +17,8 @@ export function DataProvider({ children }) {
 	const [dataLeftoversOther, setDataLeftoversOther] = useState();
 	const [dataOther, setDataOther] = useState();
 
+	const [error, setError] = useState();
+
 	async function getData(season, storedSortOption) {
 		setDataTV();
 		setDataTV_Short();
@@ -24,6 +26,7 @@ export function DataProvider({ children }) {
 		setDataLeftovers();
 		setDataLeftoversOther();
 		setDataOther();
+		setError();
 
 		const [currentSeason, currentSeasonYear] = season.split('-');
 		const { previousSeason, previousSeasonYear } = getPreviousSeason(
@@ -39,27 +42,45 @@ export function DataProvider({ children }) {
 			page: 1,
 			sort: storedSortOption,
 		});
+		console.log('res', data);
 
-		setDataTV(data.tv.media);
-		setDataTV_Short(data.rest.media.filter((x) => x.format === 'TV_SHORT'));
-		setDataMovie(data.rest.media.filter((x) => x.format === 'MOVIE'));
-		setDataLeftovers(data.leftovers.media.filter((x) => x.format === 'TV'));
-		setDataLeftoversOther(
-			data.leftovers.media.filter(
-				(x) =>
-					x.format !== 'TV' &&
-					x.format !== 'TV_SHORT' &&
-					x.format !== 'MOVIE'
-			)
-		);
-		setDataOther(
-			data.rest.media.filter(
-				(x) => x.format !== 'TV_SHORT' && x.format !== 'MOVIE'
-			)
-		);
+		if (data.error) {
+			setError(data.error);
+			setDataTV([]);
+			setDataTV_Short([]);
+			setDataMovie([]);
+			setDataLeftovers([]);
+			setDataLeftoversOther([]);
+			setDataOther([]);
+		} else {
+			setError();
+			setDataTV(data.tv.media);
+			setDataTV_Short(
+				data.rest.media.filter((x) => x.format === 'TV_SHORT')
+			);
+			setDataMovie(data.rest.media.filter((x) => x.format === 'MOVIE'));
+			setDataLeftovers(
+				data.leftovers.media.filter((x) => x.format === 'TV')
+			);
+			setDataLeftoversOther(
+				data.leftovers.media.filter(
+					(x) =>
+						x.format !== 'TV' &&
+						x.format !== 'TV_SHORT' &&
+						x.format !== 'MOVIE'
+				)
+			);
+			setDataOther(
+				data.rest.media.filter(
+					(x) => x.format !== 'TV_SHORT' && x.format !== 'MOVIE'
+				)
+			);
 
-		dataLeftoversOther &&
-			setDataOther([...new Set([...dataOther, ...dataLeftoversOther])]);
+			dataLeftoversOther &&
+				setDataOther([
+					...new Set([...dataOther, ...dataLeftoversOther]),
+				]);
+		}
 	}
 
 	const value = {
@@ -69,6 +90,7 @@ export function DataProvider({ children }) {
 		dataLeftovers,
 		dataOther,
 		getData,
+		error,
 	};
 
 	return (

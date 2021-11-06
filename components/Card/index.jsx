@@ -1,10 +1,8 @@
-import { PlusCircleIcon } from '@heroicons/react/outline';
 import parse from 'html-react-parser';
 
 import { useStorage } from '../../context/StorageContext';
+import { renderAiringDate, renderAiringInfo } from '../../lib/airingInfo';
 import AdditionalInfo from './AdditionalInfo';
-import AiringEpisodeInfo from './AiringEpisodeInfo';
-import AiringScheduleInfo from './AiringScheduleInfo';
 import AiringSourceInfo from './AiringSourceInfo';
 import GenreInfo from './GenreInfo';
 import ImageHeader from './ImageHeader';
@@ -38,24 +36,28 @@ export default function Card({ data }) {
 				<div className='w-3/5'>
 					<div className='p-4 pb-2 h-5/6 bg-theme-secondary'>
 						<div className='relative flex h-1/4 xs:h-2/6'>
-							<div className='absolute flex w-full transition-all duration-700 ease-in-out -right-96 group-hover:right-0'>
+							<div className='absolute left-0 flex w-full transition-all duration-500 ease-in-out delay-100 translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transform'>
 								<AdditionalInfo
 									hashtag={data.hashtag}
 									links={data.externalLinks}
 									trailer={data.trailer}
 								/>
 							</div>
-							<div className='absolute left-0 z-10 flex w-full transition-all duration-700 ease-in-out group-hover:-left-96'>
+							<div className='absolute z-10 flex w-full transition-all duration-500 ease-in-out delay-100 opacity-100 group-hover:-translate-x-full group-hover:opacity-0 transform'>
 								<div className='w-10/12 overflow-hidden 2xl:w-4/5 overflow-ellipsis '>
-									<AiringEpisodeInfo
-										schedule={data.airingSchedule.nodes[0]}
-										status={data.status}
-										episodes={data.episodes}
-									/>
-									<AiringScheduleInfo
-										schedule={data.airingSchedule.nodes[0]}
-										startDate={data.startDate}
-									/>
+									<div className='text-sm font-semibold text-theme-base xs:text-xs'>
+										{renderAiringInfo(
+											data.airingSchedule.nodes[0],
+											data.status,
+											data.episodes
+										)}
+									</div>
+									<div className='text-xl font-semibold text-theme-base xs:text-base'>
+										{renderAiringDate(
+											data.airingSchedule.nodes[0],
+											data.startDate
+										)}
+									</div>
 									<AiringSourceInfo
 										relations={data.relations.edges}
 										storedLanguage={storedLanguage}
@@ -71,7 +73,7 @@ export default function Card({ data }) {
 							</div>
 						</div>
 						<div className='h-3/4 xs:h-4/6'>
-							<p className='mt-2 text-xs text-theme-base line-clamp-6 md:group-hover:line-clamp-9 group-hover:line-clamp-7 '>
+							<p className='mt-2 text-xs text-theme-base line-clamp-6 md:group-hover:line-clamp-9 group-hover:line-clamp-7'>
 								{data.description && parse(data.description)}
 							</p>
 						</div>
@@ -84,7 +86,6 @@ export default function Card({ data }) {
 							/>
 						</div>
 						<div className='flex items-center justify-center w-3/12'>
-							{/* <PlusCircleIcon className='w-6 h-6 font-bold text-theme-base' /> */}
 							<StatusPopup />
 						</div>
 					</div>

@@ -19,7 +19,7 @@ function ImageHeader({
 					? `https://myanimelist.net/anime/${idMal}`
 					: siteUrl
 			}`}>
-			<a className='group'>
+			<a>
 				<div className='relative w-full h-full bg-theme-secondary'>
 					<Image
 						src={coverImage}
