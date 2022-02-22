@@ -7,7 +7,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@headlessui/react": "^1.4.1",
+		"@headlessui/react": "^1.4.3",
 		"@heroicons/react": "^1.0.5",
 		"@tailwindcss/line-clamp": "^0.2.2",
 		"graphql": "^15.8.0",
