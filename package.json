@@ -10,6 +10,7 @@
 		"@headlessui/react": "^1.4.3",
 		"@heroicons/react": "^1.0.5",
 		"@tailwindcss/line-clamp": "^0.2.2",
+		"html-react-parser": "^1.4.6",
 		"graphql": "^15.8.0",
     "graphql-request": "^3.7.0",
 		"html-react-parser": "^1.4.0",
